@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 
 /**
  * Classe représentant les couleurs qui vont être enregistrées
@@ -91,6 +93,18 @@ public class Couleur {
 	public void setB(int b) {
 		this.b = b;
 	} 
+	
+	/**
+	 * cette méthode est utilisée dans la classe ModelGestionnaire pour 
+	 * transformer un objet Couleur en un objet Color de JavaFX.
+	 * @return
+	 */
+    public Color toColor() {
+        double rouge = r / 255.0;
+        double vert = g / 255.0;
+        double bleu = b / 255.0;
+        return new Color(rouge, vert, bleu, 1.0);
+    }
 	
 	
 }
