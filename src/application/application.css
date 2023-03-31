@@ -1,3 +1,4 @@
 .root {
+	/* On change la couleur de fond en gris clair */
 	-fx-background-color : LIGHTGREY; 
 }
