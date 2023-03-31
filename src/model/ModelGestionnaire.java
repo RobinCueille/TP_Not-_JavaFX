@@ -22,12 +22,14 @@ public class ModelGestionnaire {
         FileInputStream fis = new FileInputStream(nomFichierSauvegarde);
         ObjectInputStream ois = new ObjectInputStream(fis);
         couleurs = (ArrayList<Couleur>) ois.readObject();
-        ois.close();
 
         // Initialisation de l'indice courant et des propriétés JavaFX
         indiceCourant = 0;
         couleurCouranteProperty = new SimpleObjectProperty<>(couleurs.get(indiceCourant).toColor());
         labelIndiceProperty = new SimpleStringProperty((indiceCourant + 1) + "/" + couleurs.size());
+        
+        fis.close(); 
+        ois.close(); 
     } 
 
     // Accesseurs
@@ -74,21 +76,5 @@ public class ModelGestionnaire {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(couleurs);
         oos.close();
-    }
-    public void ajouterCouleur(String nom, int rouge, int vert, int bleu) {
-        Couleur couleur = new Couleur(nom, rouge, vert, bleu);
-        couleurs.add(couleur);
-        // Mise à jour de la couleur courante si c'est la première couleur ajoutée
-        if (couleurs.size() == 1) {
-            couleurCouranteProperty.setValue(couleur.toColor());
-            labelIndiceProperty.setValue("1/1");
-        }
-    }
-    public ArrayList<String> getCouleursNames() {
-        ArrayList<String> noms = new ArrayList<>();
-        for (Couleur couleur : couleurs) {
-            noms.add(couleur.getNom());
-        }
-        return noms;
     }
 }
